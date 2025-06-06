@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: rgba(33, 132, 159, 0.463);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        #one{
+            background-color: white;
+            border-radius: 10px;
+            height: 45px;
+            width: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 5px 10px black;
+        }
+        button{
+            background-color: rgb(71, 144, 223);
+            color: white;
+            margin-left:30px;
+            cursor: pointer;
+        }
+        #abc{
+            text-align: center;
+        }
+        p{
+            font-weight: 900;
+            font-size: large;
+        }
+        #two,#three,#four{
+            background-color: white;
+            height:100px;
+            width:80px;
+            box-shadow: 0px 5px 10px black;
+            margin-right: 70px;
+        }
+        #gr{
+            display: flex;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div id="abc">
+    <header>
+        <h1>AGE CALCULATOR</h1>
+    </header>
+    <div id="one">
+        <input type="date" id="birthdate" placeholder="date">
+        <button onclick="GenerateAge()">Calculator</button>
+    </div>
+    <div id="gr">
+    <div id="two">
+        <p id="years">00</p>
+        <h3>YEAR</h3>
+    </div>
+    <div id="three">
+        <p id="months">00</p>
+        <h3>MONTH</h3>
+    </div>
+    <div id="four">
+        <p id="days">00</p>
+        <h3>DAY</h3>
+    </div>
+    </div>
+    </div>
+    <script>
+        function GenerateAge() {
+            const input = document.getElementById("birthdate").value;
+            if (input ==='') {
+                alert("Give valid date");
+                return;
+            }
+            const birthDate=new Date(input);
+            const today=new Date();
+            let years=today.getFullYear()-birthDate.getFullYear();
+            let months=today.getMonth()-birthDate.getMonth();
+            let days=today.getDate()-birthDate.getDate();
+            if(days<0) {
+                months--;
+                const prevMonth = new Date(today.getFullYear(),today.getMonth(), 0);
+                days +=prevMonth.getDate();
+            }
+            if(months<0) {
+                years--;
+                months += 12;
+            }
+            document.getElementById("years").textContent=years<10?"0"+years:years;
+            document.getElementById("months").textContent=months<10?"0"+months:months;
+            document.getElementById("days").textContent=days<10?"0"+days:days;
+        }
+    </script>
+</body>
+</html>
